@@ -1,0 +1,35 @@
+```gitignore
+# Virtual Environment
+venv/
+.venv/
+
+# Environment Variables
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Output
+output/
+
+# PDFs (optional - keep sample resumes out of GitHub)
+resumes/*.pdf
+```
