@@ -1,5 +1,8 @@
 import json
-from prompts import RESUME_REVIEW_PROMPT
+from prompts import (
+    RESUME_REVIEW_PROMPT,
+    RESUME_REWRITE_PROMPT
+)
 from groq import Groq
 from config import GROQ_API_KEY
 
@@ -20,7 +23,7 @@ class ResumeReviewer:
             messages=[
                 {
                     "role":"system",
-                    "content":"You are an experienced resume reviewer. Review in 1 line"
+                    "content":"You are an expert ATS resume writer."
                 },
                 {
                     "role":"user",
@@ -29,6 +32,28 @@ class ResumeReviewer:
             ],
             temperature=0
         )
+        return json.loads(response.choices[0].message.content)
+    
+    def rewrite_resume(self, resume_text, job_description):
 
-        answer = response.choices[0].message.content
-        return json.loads(answer)
+        prompt = RESUME_REWRITE_PROMPT.format(
+            resume=resume_text,
+            job_description=job_description
+        )
+
+        response = self.client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert ATS resume writer."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0
+        )
+
+        return json.loads(response.choices[0].message.content)

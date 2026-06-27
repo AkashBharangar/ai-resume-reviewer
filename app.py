@@ -10,6 +10,7 @@ job_description = extract_job_description("job_descriptions/sample_jd.txt")
 reviewer = ResumeReviewer()
 
 response = reviewer.review_resume(resume_text, job_description)
+print(response)
 
 print(f"ATS Score: {response['ats_score']}")
 print(f"Match Score: {response['match_score']}")

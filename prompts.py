@@ -1,7 +1,39 @@
 RESUME_REVIEW_PROMPT = """
-You are an experienced ATS recruiter.
+You are an experienced ATS (Applicant Tracking System) and technical recruiter.
 
-Analyze the following resume against the given job description.
+Analyze the following resume and return your analysis in the specified JSON format.
+
+Resume:
+--------------------
+{resume}
+--------------------
+
+Return ONLY valid JSON in the following format:
+
+{{
+    "ats_score": <integer>,
+    "match score": <interger>,
+    "missing_keywords": [],
+    "strengths": [],
+    "weaknesses": [],
+    "suggestions": []
+}}
+
+Rules:
+- ATS score must be between 0 and 100.
+- Suggestions should be specific and actionable.
+- Do not include markdown.
+- Do not wrap the JSON inside ```json.
+- Return only the JSON object.
+"""
+
+
+
+
+RESUME_REWRITE_PROMPT = """
+You are an expert resume writer.
+
+Rewrite the following resume to better match the provided job description.
 
 Resume:
 --------------------
@@ -13,24 +45,20 @@ Job Description:
 {job_description}
 --------------------
 
-Return ONLY valid JSON in the following format:
+Return ONLY valid JSON in this format:
 
 {{
-    "ats_score": <integer>,
-    "match_score": <integer>,
-    "matching_keywords": [],
-    "missing_keywords": [],
-    "strengths": [],
-    "weaknesses": [],
-    "suggestions": []
+    "professional_summary": "",
+    "technical_skills": [],
+    "work_experience": "",
+    "projects": "",
+    "additional_suggestions": []
 }}
 
-Rules:
-- ATS score should be between 0 and 100.
-- Match score should indicate how well the resume matches the job description.
-- Missing keywords should be extracted from the job description.
-- Suggestions should help improve the resume for THIS specific role.
-- Return ONLY valid JSON.
-- Do NOT wrap the JSON inside ```json or ```.
-- Do NOT include any explanation before or after the JSON.
+Do not hallucinate experience.
+Do not invent projects.
+Only improve wording, organization, and ATS optimization.
+Return ONLY valid JSON.
+Do NOT wrap the JSON inside ```json or ```.
+Do NOT include any explanation before or after the JSON.
 """
