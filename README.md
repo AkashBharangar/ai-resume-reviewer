@@ -1,59 +1,68 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Groq](https://img.shields.io/badge/LLM-Groq-purple)
 ![Llama](https://img.shields.io/badge/Model-Llama_3.3_70B-green)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-red)
+![Docker](https://img.shields.io/badge/Container-Docker-blue)
 ![Prompt Engineering](https://img.shields.io/badge/Prompt-Engineering-orange)
-![JSON](https://img.shields.io/badge/Output-JSON-red)
+![JSON](https://img.shields.io/badge/Output-Structured_JSON-green)
 
 # 📄 AI Resume Reviewer
 
-An AI-powered Resume Reviewer built using **Groq API** and **Llama 3.3** that analyzes PDF resumes, generates an ATS score, identifies missing keywords, highlights strengths and weaknesses, and provides actionable improvement suggestions.
+An AI-powered Resume Reviewer built using **Groq API**, **Llama 3.3**, and **Streamlit** that analyzes PDF resumes, compares them against job descriptions, calculates ATS and job match scores, and rewrites resumes for better ATS optimization.
 
-This project demonstrates how modern LLM-powered applications process PDF documents, engineer prompts, generate structured JSON outputs, and integrate AI into real-world workflows.
+This project demonstrates how modern LLM-powered applications process PDF documents, engineer prompts, generate structured JSON outputs, and build production-ready AI workflows.
 
 ---
 
 ## 🚀 Features
 
-- 📄 Accepts resume PDFs
-- 📖 Extracts text from PDF documents
-- 🤖 Uses Groq API with Llama 3.3
-- 📊 Generates ATS score
-- 🔍 Identifies missing keywords
-- 💪 Highlights resume strengths
-- ⚠️ Detects weaknesses
-- 💡 Provides actionable improvement suggestions
-- 🧠 Uses Prompt Engineering for reliable outputs
-- 📦 Returns structured JSON responses
-- 🔐 Secure API key management using environment variables
+- 📄 Upload Resume PDFs
+- 📋 Compare Resume with Job Description
+- 📊 Generate ATS Score
+- 🎯 Generate Job Match Score
+- 🔍 Identify Matching Keywords
+- ❌ Detect Missing Keywords
+- 💪 Highlight Resume Strengths
+- ⚠️ Detect Resume Weaknesses
+- ✍️ AI-Powered Resume Rewriting
+- 🤖 Powered by Groq API & Llama 3.3
+- 🧠 Prompt Engineering
+- 📦 Structured JSON Responses
+- 🎨 Interactive Streamlit Web Interface
+- 🐳 Dockerized Application
+- 🔐 Secure API Key Management using Environment Variables
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-Resume PDF
-      │
-      ▼
-PDF Text Extraction
-      │
-      ▼
-Prompt Engineering
-      │
-      ▼
-Groq API (Llama 3.3)
-      │
-      ▼
-Structured JSON Response
-      │
-      ▼
-JSON Parsing
-      │
-      ▼
-ATS Score
-Missing Keywords
-Strengths
-Weaknesses
-Suggestions
+                Resume PDF
+                     │
+                     ▼
+             PDF Text Extraction
+                     │
+                     ▼
+            Job Description Input
+                     │
+                     ▼
+             Prompt Engineering
+                     │
+                     ▼
+          Groq API (Llama 3.3)
+                     │
+                     ▼
+         Structured JSON Response
+                     │
+        ┌────────────┴─────────────┐
+        ▼                          ▼
+ Resume Analysis          Resume Rewriting
+        │                          │
+        ▼                          ▼
+ ATS Score               ATS Optimized Resume
+ Match Score
+ Missing Keywords
+ Suggestions
 ```
 
 ---
@@ -63,12 +72,15 @@ Suggestions
 ```text
 resume-reviewer/
 │
-├── app.py                 # Main application
-├── parser.py              # PDF text extraction
-├── reviewer.py            # Groq API integration
-├── prompts.py             # Prompt templates
-├── config.py              # Environment configuration
+├── app.py                     # CLI application
+├── streamlit_app.py           # Streamlit web interface
+├── parser.py                  # PDF & JD parsing
+├── reviewer.py                # Groq API integration
+├── prompts.py                 # Prompt templates
+├── config.py                  # Environment configuration
 ├── requirements.txt
+├── Dockerfile
+├── .dockerignore
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -81,11 +93,13 @@ resume-reviewer/
 | Component | Technology |
 |-----------|------------|
 | Language | Python |
-| LLM | Groq API |
+| LLM Provider | Groq API |
 | Model | Llama 3.3 70B Versatile |
+| Frontend | Streamlit |
 | PDF Parsing | pypdf |
 | Prompting | Prompt Engineering |
-| Output Format | JSON |
+| Output Format | Structured JSON |
+| Containerization | Docker |
 | Environment Variables | python-dotenv |
 
 ---
@@ -114,7 +128,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-#### Mac/Linux
+#### Linux / Mac
 
 ```bash
 source venv/bin/activate
@@ -138,93 +152,124 @@ Create a `.env` file inside the project root.
 GROQ_API_KEY=your_groq_api_key
 ```
 
-Obtain your API key from the Groq Console.
-
 ---
 
-## ▶️ Running the Project
+## ▶️ Running the CLI Version
 
 ```bash
 python app.py
 ```
 
-Enter the path to your resume PDF.
+---
 
-Example:
+## 🌐 Running the Streamlit App
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Then open
 
 ```text
-Enter Resume Path:
-C:\Users\User\Documents\Resume.pdf
+http://localhost:8501
+```
+
+---
+
+## 🐳 Running with Docker
+
+### Build Docker Image
+
+```bash
+docker build -t resume-reviewer .
+```
+
+### Run Docker Container
+
+```bash
+docker run -p 8501:8501 --env-file .env resume-reviewer
 ```
 
 ---
 
 ## 💡 How It Works
 
-1. User provides the path to a resume PDF.
-2. The application extracts text using `pypdf`.
-3. A prompt is dynamically generated.
-4. The resume is analyzed using Groq's Llama 3.3 model.
-5. The model returns structured JSON.
-6. Python parses the JSON response.
-7. The application displays:
+1. User uploads a resume PDF.
+2. User pastes a Job Description.
+3. PDF text is extracted using `pypdf`.
+4. A prompt is dynamically generated.
+5. Resume and Job Description are sent to Groq's Llama 3.3 model.
+6. The model returns structured JSON.
+7. Python parses the JSON response.
+8. The application displays:
    - ATS Score
+   - Match Score
+   - Matching Keywords
    - Missing Keywords
    - Strengths
    - Weaknesses
    - Suggestions
+9. Users can generate an ATS-optimized rewritten resume.
 
 ---
 
 ## 🧠 Key Concepts Learned
 
-### 1. PDF Parsing
+### 📄 PDF Parsing
 
 Extracting text from PDF documents for LLM processing.
 
-### 2. Prompt Engineering
+### 🤖 LLM API Integration
 
-Designing prompts that generate reliable and structured AI responses.
+Integrating Python applications with Groq's ultra-fast inference API.
 
-### 3. LLM API Integration
+### 🧠 Prompt Engineering
 
-Connecting Python applications with Groq's ultra-fast inference API.
+Designing prompts that generate reliable, structured, and context-aware AI responses.
 
-### 4. Structured JSON Outputs
+### 📦 Structured JSON Outputs
 
-Generating machine-readable outputs from LLMs.
+Generating machine-readable responses from LLMs.
 
-### 5. JSON Parsing
+### 📊 Resume ↔ Job Description Matching
 
-Converting LLM responses into Python dictionaries for downstream processing.
+Using LLMs to compare resumes against job requirements and identify skill gaps.
 
-### 6. Modular Application Design
+### ✍️ AI Resume Rewriting
 
-Separating application responsibilities into reusable modules.
+Rewriting resumes while preserving factual information and improving ATS compatibility.
+
+### 🎨 Streamlit
+
+Building an interactive web interface for AI applications.
+
+### 🐳 Docker
+
+Containerizing AI applications for consistent deployment across environments.
 
 ---
 
 ## 🚀 Future Improvements
 
-- 📋 Resume vs Job Description matching
-- ✍️ AI-powered resume rewriting
-- 🎨 Streamlit web interface
+- 📄 Export analysis as PDF
+- 📑 Export rewritten resume as DOCX
+- 📈 ATS score visualization
+- 📊 Resume benchmarking
 - ⚡ FastAPI REST API
-- 📄 PDF report generation
-- 📊 ATS score visualization
 - 💾 Resume history
-- 🌍 Multi-model support
-- 🧠 Structured Outputs API
-- 🐳 Docker deployment
+- 🔐 User authentication
+- 🌍 Multi-language support
+- 🧠 Native Structured Outputs
+- ☁️ Cloud deployment (Render/AWS)
 
 ---
 
 ## ⚠️ Limitations
 
-- ATS score is AI-generated and may differ from commercial ATS systems.
-- PDF parsing quality depends on the document format.
-- Internet connection is required.
-- Currently supports one resume at a time.
+- ATS scores are AI-generated estimates and may differ from commercial ATS systems.
+- Resume quality depends on PDF text extraction.
+- Requires an active internet connection.
+- Supports one resume at a time.
 
 ---
 
@@ -232,14 +277,17 @@ Separating application responsibilities into reusable modules.
 
 After building this project, you understand:
 
-- PDF processing in Python
+- PDF processing
 - Prompt Engineering
 - Groq API integration
 - LLM application architecture
-- Structured JSON generation
-- JSON parsing
+- Structured JSON outputs
+- Resume ↔ Job Description matching
+- AI-powered content rewriting
+- Streamlit application development
+- Docker containerization
 - Environment variable management
-- Modular Python application design
+- Modular Python project organization
 
 ---
 
@@ -247,14 +295,14 @@ After building this project, you understand:
 
 Contributions are welcome!
 
-Potential improvements include:
+Possible improvements:
 
 - Better prompt optimization
-- Improved error handling
-- Resume benchmarking
-- Multiple model support
-- Better CLI/UI
-- Export reports
+- Better error handling
+- Improved UI/UX
+- Additional export formats
+- Multi-model support
+- Cloud deployment
 
 ---
 
@@ -262,10 +310,12 @@ Potential improvements include:
 
 - Groq for ultra-fast LLM inference
 - Meta for the Llama models
-- pypdf for PDF text extraction
+- Streamlit for rapid web app development
+- pypdf for PDF parsing
+- Docker for containerization
 
 ---
 
 ## 👨‍💻 Author
 
-Built as a learning project while exploring **Generative AI**, **Prompt Engineering**, **LLM Applications**, and **AI Engineering**.
+Built as a hands-on learning project while exploring **Generative AI**, **Prompt Engineering**, **LLM Applications**, **AI Engineering**, and **Production-Ready AI Systems**.
