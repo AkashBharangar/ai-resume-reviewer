@@ -1,0 +1,93 @@
+## AI Engineer Job Description
+
+### Job Title
+
+**AI Engineer**
+
+### Job Summary
+
+We are looking for an AI Engineer to design, build, deploy, and maintain AI-powered applications and machine learning solutions. The ideal candidate has strong software engineering skills, experience with machine learning and large language models (LLMs), and the ability to deliver scalable AI systems that solve real business problems.
+
+### Key Responsibilities
+
+* Design, develop, and deploy AI and machine learning solutions.
+* Build and optimize LLM-powered applications using prompt engineering, Retrieval-Augmented Generation (RAG), and AI agents.
+* Develop, train, evaluate, and fine-tune machine learning and deep learning models.
+* Integrate AI models with web applications, APIs, and enterprise systems.
+* Build scalable data pipelines for model training and inference.
+* Monitor model performance, accuracy, latency, and operational costs.
+* Implement model versioning, testing, CI/CD, and MLOps best practices.
+* Collaborate with product managers, data scientists, and software engineers to define AI solutions.
+* Ensure AI systems comply with security, privacy, and responsible AI standards.
+* Stay current with emerging AI technologies and recommend improvements.
+
+### Required Qualifications
+
+* Bachelor's or Master's degree in Computer Science, Artificial Intelligence, Data Science, or a related field.
+* 2–5+ years of experience in software development or AI/ML engineering.
+* Strong programming skills in Python.
+* Experience with machine learning frameworks such as TensorFlow, PyTorch, or Scikit-learn.
+* Experience working with LLMs and Generative AI platforms.
+* Knowledge of REST APIs, microservices, and cloud platforms.
+* Familiarity with SQL and NoSQL databases.
+* Experience with Git and software development best practices.
+
+### Preferred Qualifications
+
+* Experience with RAG architectures and vector databases.
+* Knowledge of AI agents and workflow orchestration.
+* Experience with cloud AI services (AWS, Azure, or GCP).
+* Familiarity with Docker, Kubernetes, and CI/CD pipelines.
+* Experience with MLOps tools and model monitoring.
+* Understanding of AI governance, security, and responsible AI practices.
+
+### Technical Skills
+
+* **Programming:** Python, SQL
+* **Machine Learning:** Supervised/Unsupervised Learning, Deep Learning
+* **Frameworks:** PyTorch, TensorFlow, Scikit-learn
+* **Generative AI:** LLMs, Prompt Engineering, RAG, AI Agents
+* **Vector Databases:** Pinecone, Weaviate, FAISS, Chroma
+* **Cloud:** AWS, Azure, Google Cloud Platform
+* **DevOps:** Docker, Kubernetes, Git, CI/CD
+* **APIs:** FastAPI, Flask, REST APIs
+* **Data:** Pandas, NumPy, Spark (preferred)
+
+### Soft Skills
+
+* Strong analytical and problem-solving abilities.
+* Excellent communication and collaboration skills.
+* Ability to work in cross-functional teams.
+* Continuous learning mindset.
+* Strong attention to detail and quality.
+
+### Nice-to-Have Experience
+
+* Fine-tuning foundation models.
+* Multimodal AI (text, image, audio).
+* Computer Vision or NLP projects.
+* AI observability and evaluation frameworks.
+* Experience with enterprise AI deployments.
+
+### Key Performance Indicators (KPIs)
+
+* Successful deployment of AI solutions to production.
+* Improvement in model accuracy and business outcomes.
+* Reduced inference latency and operational costs.
+* High system reliability and uptime.
+* Adoption and impact of AI features by end users.
+
+### Sample Tech Stack
+
+* Python
+* PyTorch / TensorFlow
+* LangChain / LlamaIndex
+* OpenAI APIs or open-source LLMs
+* FastAPI
+* Docker & Kubernetes
+* PostgreSQL
+* Pinecone / Chroma / FAISS
+* AWS / Azure / GCP
+* GitHub Actions / Jenkins
+
+This job description can be adapted for entry-level, mid-level, or senior AI Engineer roles by adjusting the years of experience, leadership expectations, and scope of responsibilities.

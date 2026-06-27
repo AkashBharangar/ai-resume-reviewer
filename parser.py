@@ -11,3 +11,7 @@ def extract_text(pdf_path: str) -> str:
         if page_text:
             text += page_text + "\n"
     return text
+
+def extract_job_description(file_path: str) -> str:
+    with open(file_path, "r", encoding="utf-8") as file:
+        return file.read()

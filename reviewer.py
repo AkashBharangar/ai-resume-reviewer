@@ -8,10 +8,11 @@ class ResumeReviewer:
     def __init__(self):
         self.client = Groq(api_key=GROQ_API_KEY)
 
-    def review_resume(self, resume_text: str):
+    def review_resume(self, resume_text: str, job_description: str):
 
         prompt = RESUME_REVIEW_PROMPT.format(
-            resume = resume_text
+            resume = resume_text,
+            job_description=job_description
         )
         
         response = self.client.chat.completions.create(
